@@ -14,6 +14,16 @@
 		<link rel="stylesheet" href="css/icomoon.css">
 		<link rel="stylesheet" href="css/style.css">
   	</head>
+	  <style>
+        #loader {
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
   	<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
     	<nav class="navbar navbar-expand-lg  ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    	<div class="container">
@@ -98,7 +108,7 @@
 		        </div>
 	          <div class="counter-wrap ftco-animate d-flex mt-md-3">
               <div class="text">
-                <p><a href="#" class="btn btn-primary py-3 px-3"><i class="fa fa-arrow-down" aria-hidden="true"></i> T&eacute;l&eacute;charger mon CV</a></p>
+                <p><a href="https://drive.google.com/uc?export=download&id=1jxhGHcuNZPgJ0YTbyiu2fnpsviz7PqkJ" id="downloadLink" class="btn btn-primary py-4 px-5" onlick="startDownload()"><i class="fa fa-arrow-down" aria-hidden="true"></i> <img id="loader" src="css/ajax-loader.gif"/> T&eacute;l&eacute;charger mon CV</a></p>
 			</div>
 		</div>
 	</div>
@@ -185,9 +195,10 @@
     		</div>
     		<div class="row justify-content-center mt-5">
     			<div class="col-md-6 text-center ftco-animate">
-    				<p><a href="#" class="btn btn-primary py-4 px-5"><i class="fa fa-arrow-down" aria-hidden="true"></i> T&eacute;l&eacute;charger mon CV</a></p>
+    				<p><a href="https://drive.google.com/uc?export=download&id=1jxhGHcuNZPgJ0YTbyiu2fnpsviz7PqkJ" id="downloadLink" class="btn btn-primary py-4 px-5" onlick="startDownload()"><i class="fa fa-arrow-down" aria-hidden="true"></i> <img id="loader" src="css/ajax-loader.gif"/> T&eacute;l&eacute;charger mon CV</a></p>
     			</div>
     		</div>
+			
     	</div>
     </section>
     <section class="ftco-section" id="services-section">
@@ -572,6 +583,19 @@
 				document.getElementById('responseText').innerHTML = '<i class="fa fa-times-circle" style="color: red; margin-right: 8px;"></i>Erreur lors de l\'envoi de votre message.';
 				});
 		});
+		function startDownload() {
+            // Afficher le loader
+            document.getElementById('loader').style.display = 'block';
+
+            // Attendre un peu avant de commencer le téléchargement pour simuler le chargement
+            setTimeout(function() {
+                // Effectuer le téléchargement
+                window.location.href = document.getElementById('downloadLink').href;
+                
+                // Cacher le loader après le début du téléchargement
+                document.getElementById('loader').style.display = 'none';
+            }, 1000);  // Temps d'attente de 1 seconde avant de démarrer le téléchargement
+        }
 	</script>
 	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 	<script src="js/jquery.min.js"></script>
