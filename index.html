@@ -40,6 +40,27 @@
 			width: 24px; /* Vous pouvez ajuster la taille selon vos besoins */
 			height: 24px;
 		}
+		#downloadBtn1 {
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			border: 1px solid #3498db;
+			background-color: #3498db;
+			color: white;
+			border-radius: 5px;
+			display: inline-block;
+			text-align: center;
+		}
+
+		#loadercv1 {
+			display: none;
+		}
+
+		/* Si vous voulez centrer l'élément de chargement */
+		#loadercv1 {
+			width: 24px; /* Vous pouvez ajuster la taille selon vos besoins */
+			height: 24px;
+		}
 
     </style>
   	<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -221,12 +242,12 @@
     		<div class="row justify-content-center mt-5">
     			<div class="col-md-6 text-center ftco-animate">
 					<p>
-						<a href="javascript:void(0);" id="downloadLink" class="btn btn-primary py-4 px-5" onclick="startDownload()">
-							<i id="downloadIcon" class="fa fa-arrow-down" aria-hidden="true"></i>
-							<img id="loadercv" src="css/ajax-loader.gif" style="display:none; margin-right: 10px;"/>
+						<a href="javascript:void(0);" id="downloadLink1" class="btn btn-primary py-4 px-5" onclick="startDownload1()">
+							<i id="downloadIcon1" class="fa fa-arrow-down" aria-hidden="true"></i>
+							<img id="loadercv1" src="css/ajax-loader.gif" style="display:none; margin-right: 10px;"/>
 							Télécharger mon CV
 						</a>
-					</p>					
+					</p>				
     			</div>
     		</div>
 			
@@ -551,7 +572,7 @@
 					<textarea id="message" name="message" cols="30" rows="7" class="form-control" placeholder="Message" required></textarea>
 				</div>
 				<div id="loader" style="display: none; text-align: center;">
-					<img src="https://i.gifer.com/4V0b.gif" alt="loading" style="width: 50px;"/>
+					<img src="css/ajax-loader.gif" alt="loading" style="width: 50px;"/>
 					<p style="color:white">Envoi en cours...</p>
 					</div>
 					<div id="responseMessage" style="display: none; text-align: center; margin-top: 20px;">
@@ -635,7 +656,54 @@
 						downloadIcon.style.display = 'inline-block';
 						loader.style.display = 'none';
 					});
-			}, 500); // Attente de 500 ms pour afficher le loader avant de commencer le téléchargement
+			}, 1000); // Attente de 500 ms pour afficher le loader avant de commencer le téléchargement
+		}
+		function startDownload1() {
+			// Cacher l'icône de téléchargement et afficher le loader
+			var downloadIcon1 = document.getElementById('downloadIcon1');
+			const loader1 = document.getElementById("loadercv1");
+	
+			// Afficher le loader immédiatement et cacher l'icône de téléchargement
+			downloadIcon1.style.display = 'none';
+			loader1.style.display = 'inline-block';  // Afficher le loader
+	
+			// Utilisation de fetch pour récupérer le fichier
+			const fileUrl = "CV/CV de Safidy Herimampianina.pdf";
+			const fileName = "CV_de_Safidy_Herimampianina.pdf";
+	
+			// Commencer à télécharger après un petit délai (500 ms) pour afficher l'animation du loader
+			setTimeout(() => {
+				fetch(fileUrl)
+					.then(response => {
+						if (!response.ok) {
+							throw new Error("Erreur lors de la récupération du fichier.");
+						}
+						return response.blob();
+					})
+					.then(blob => {
+						// Créer un URL temporaire pour le Blob
+						const url = window.URL.createObjectURL(blob);
+						const anchor = document.createElement('a');
+						anchor.href = url;
+						anchor.download = fileName;
+						document.body.appendChild(anchor);
+						anchor.click();
+						// Nettoyer l'URL temporaire après le téléchargement
+						window.URL.revokeObjectURL(url);
+						document.body.removeChild(anchor);
+	
+						// Réinitialiser l'interface après le téléchargement
+						downloadIcon1.style.display = 'inline-block';
+						loader1.style.display = 'none';  // Cacher le loader une fois le téléchargement terminé
+					})
+					.catch(error => {
+						console.error("Erreur :", error);
+						alert("Échec du téléchargement du fichier.");
+						// Réinitialiser l'interface même en cas d'erreur
+						downloadIcon1.style.display = 'inline-block';
+						loader1.style.display = 'none';
+					});
+			}, 1000); // Attente de 500 ms pour afficher le loader avant de commencer le téléchargement
 		}
 	</script>
 	
@@ -667,7 +735,6 @@
 		});
 	</script>
 	
-	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>

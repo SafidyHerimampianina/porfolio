@@ -264,7 +264,7 @@
     type: 'iframe',
     mainClass: 'mfp-fade',
     removalDelay: 160,
-    preloader: false,
+    // preloader: false,
 
     fixedContentPos: false
   });
